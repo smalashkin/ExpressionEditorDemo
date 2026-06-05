@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace ExpressionEditorDemo
+namespace DxExpressionEditorDemo
 {
     /// <summary>
     /// Sample data model representing laser ablation parameters.

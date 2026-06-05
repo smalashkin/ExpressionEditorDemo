@@ -1,4 +1,4 @@
-﻿namespace ExpressionEditorDemo
+﻿namespace DxExpressionEditorDemo
 {
     internal static class Program
     {

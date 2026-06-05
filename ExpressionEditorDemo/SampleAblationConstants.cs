@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace ExpressionEditorDemo;
+namespace DxExpressionEditorDemo;
 
 /// <summary>
 /// Physical and mathematical constants used in laser ablation calculations.

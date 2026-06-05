@@ -6,12 +6,16 @@ using DevExpress.Data.Filtering.Helpers;
 using DevExpress.DataAccess.ExpressionEditor;
 using DevExpress.DataAccess.Native.ExpressionEditor;
 
-namespace ExpressionEditorDemo
+namespace DxExpressionEditorDemo
 {
     public partial class frmExpressionEditorDemo : XtraForm
     {
+        private static readonly Type _modelType = typeof(SampleAblationModel);
+        private static readonly Type _constantsType = typeof(SampleAblationConstants);
 
         private readonly SampleAblationModel _sampleData = new();
+        private static readonly PropertyDescriptorCollection _evaluatorProperties =
+            EvaluatorPropertyHelper.BuildProperties(_modelType, _constantsType);
 
         public static void Run() => new frmExpressionEditorDemo()?.Show();
 
@@ -34,19 +38,18 @@ namespace ExpressionEditorDemo
             context.CriteriaOperatorValidatorProvider = new ValidatorProvider();
 
             // Populate from model type: Properties → Columns, Methods → Functions
-            ExpressionEditorTypeHelper.PopulateColumns(context, typeof(SampleAblationModel));
-            ExpressionEditorTypeHelper.PopulateFunctions(context, typeof(SampleAblationModel));
+            ExpressionEditorTypeHelper.PopulateColumns(context, _modelType);
+            ExpressionEditorTypeHelper.PopulateFunctions(context, _modelType);
 
             // Populate domain-specific constants from dedicated class
-            ExpressionEditorTypeHelper.PopulateConstants(context, typeof(SampleAblationConstants));
+            ExpressionEditorTypeHelper.PopulateConstants(context, _constantsType);
 
             return context;
         }
 
         private static string? ValidateExpression(string expression)
         {
-            if (string.IsNullOrWhiteSpace(expression))
-                return "⚠ Expression is empty.";
+            if (string.IsNullOrWhiteSpace(expression)) return "⚠ Expression is empty.";
 
             try
             {
@@ -98,10 +101,7 @@ namespace ExpressionEditorDemo
                 }
 
                 // Merge model properties + constants so evaluator resolves both
-                PropertyDescriptorCollection properties =
-                    EvaluatorPropertyHelper.BuildProperties(typeof(SampleAblationModel), typeof(SampleAblationConstants));
-
-                ExpressionEvaluator evaluator = new(properties, criteria);
+                ExpressionEvaluator evaluator = new(_evaluatorProperties, criteria);
                 object result = evaluator.Evaluate(_sampleData);
 
                 meResult.Text =

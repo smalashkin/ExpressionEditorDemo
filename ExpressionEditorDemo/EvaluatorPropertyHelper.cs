@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.Reflection;
 
-namespace ExpressionEditorDemo;
+namespace DxExpressionEditorDemo;
 
 /// <summary>
 /// Provides constant values as virtual property descriptors for expression evaluation.

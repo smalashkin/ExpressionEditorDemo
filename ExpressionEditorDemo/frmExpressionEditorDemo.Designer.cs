@@ -1,4 +1,4 @@
-﻿namespace ExpressionEditorDemo
+﻿namespace DxExpressionEditorDemo
 {
     partial class frmExpressionEditorDemo
     {

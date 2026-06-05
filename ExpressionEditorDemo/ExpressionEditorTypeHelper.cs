@@ -2,7 +2,7 @@ using System.ComponentModel;
 using System.Reflection;
 using DevExpress.Data.Controls.ExpressionEditor;
 
-namespace ExpressionEditorDemo;
+namespace DxExpressionEditorDemo;
 
 /// <summary>
 /// Populates an <see cref="ExpressionEditorContext"/> from .NET types via reflection.
